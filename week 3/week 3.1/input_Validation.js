@@ -8,7 +8,15 @@ app.post('/health-checkup',function(req,res){
     const kidneys=req.body.kidneys;
     const kidneyLength=kidneys.length;
     const response=schema.safeParse(kidneys);
-    res.json(response);
+    if(!response.success){
+        res.status(403).json({
+            msg:"wrong input"
+        })
+    }
+    else{
+        res.send({response})
+    }
+    
 })
 
 //global catches
